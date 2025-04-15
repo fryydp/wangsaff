@@ -14,41 +14,112 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Kolom untuk Username
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: "Username",
-                border: OutlineInputBorder(),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.purple, Colors.blue],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20.0),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              elevation: 8,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Welcome Back",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple[900],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // Kolom untuk Username
+                    TextField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        labelText: "Username",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    // Kolom untuk Password
+                    TextField(
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 20),
+                    // Tombol Login
+                    ElevatedButton(
+                      onPressed: () {
+                        _performLogin();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // Tautan untuk Forgot Password
+                    TextButton(
+                      onPressed: () {
+                        // Logika untuk lupa password
+                      },
+                      child: const Text(
+                        "Forgot Password?",
+                        style: TextStyle(color: Colors.purple),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // Tautan untuk Sign Up
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't have an account? "),
+                        TextButton(
+                          onPressed: () {
+                            // Navigasi ke halaman sign up
+                          },
+                          child: const Text(
+                            "Sign Up",
+                            style: TextStyle(color: Colors.purple),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 16),
-            // Kolom untuk Password
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: "Password",
-                border: OutlineInputBorder(),
-              ),
-              obscureText: true, // Menyembunyikan teks password
-            ),
-            const SizedBox(height: 20),
-            // Tombol Login
-            ElevatedButton(
-              onPressed: () {
-                _performLogin();
-              },
-              child: const Text("Login"),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -59,14 +130,11 @@ class _LoginPageState extends State<LoginPage> {
     String password = _passwordController.text;
 
     // Logika untuk memeriksa username dan password
-    // Misalnya, Anda bisa memeriksa dengan API atau database
     if (username == "admin" && password == "password") {
-      // Jika login berhasil, navigasi ke halaman utama
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage()), // Ganti dengan halaman utama Anda
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     } else {
-      // Jika login gagal, tampilkan snackbar
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Username atau password salah")),
       );

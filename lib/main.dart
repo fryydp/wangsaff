@@ -7,15 +7,6 @@ import 'GaleriPage.dart';
 
 void main() {
   runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage()));
-  // runApp(
-  //   MultiProvider(
-  //     providers: [
-  //       // ChangeNotifierProvider(create: (context) => ProviderProduk()),
-  //       // ChangeNotifierProvider(create: (context) => ProviderKeranjang()),
-  //     ],
-  //     child: MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()),
-  //   ),
-  // );
 }
 
 class MyApp extends StatefulWidget {
